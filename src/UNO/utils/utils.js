@@ -60,16 +60,6 @@ export const createPlayer = players => {
   ];
 };
 
-// For debugging
-export const countCards = cards => {
-  return (
-    cards[0][0].cards.length +
-    cards[0][1].cards.length +
-    cards[1][0].length +
-    cards[1][1].length
-  );
-};
-
 export const addToArray = (arr, element) => {
   let array = arr;
   if (element !== undefined) array.push(element);

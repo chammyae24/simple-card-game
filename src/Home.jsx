@@ -22,10 +22,6 @@ export default function Home({ setHome }) {
   );
 }
 
-// console.log(document.styleSheets);
-// document.body.style.setProperty("--back-color", "white");
-// document.body.style.setProperty("--fore-color", "black");
-
 const home = {
   display: "flex",
   height: "100vh",

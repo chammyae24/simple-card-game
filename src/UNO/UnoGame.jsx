@@ -4,12 +4,7 @@ import CardBack from "./Components/CardBack";
 
 import sfx1 from "../audio/card-sfx-02.wav";
 
-import {
-  getCards,
-  createPlayer,
-  countCards,
-  removeArrayFromStart
-} from "./utils/utils";
+import { getCards, createPlayer, removeArrayFromStart } from "./utils/utils";
 import { placeRandomCard, randomColor } from "./utils/gameLogic";
 
 import "./unoGame.css";
@@ -43,7 +38,6 @@ export default function UnoGame({ setHome, setSound, play }) {
   const [computerThinking, setComputerThinking] = createSignal(false);
   const [colorChosenFromComputer, setColorChosenFromComputer] =
     createSignal("");
-  const [skip, setSkip] = createSignal("");
 
   // creat something to decide whose turns
   const [turns, setTurns] = createSignal({
@@ -228,8 +222,6 @@ export default function UnoGame({ setHome, setSound, play }) {
             setDeskCard(desks()[0]);
           }
           setDrawCards(cards => removeArrayFromStart(cards));
-        } else {
-          setSkip("Skip");
         }
         setComputerThinking(false);
         setTurns({
@@ -263,7 +255,7 @@ export default function UnoGame({ setHome, setSound, play }) {
                     drawCards()[1],
                     drawCards()[2],
                     drawCards()[3],
-                    ...players[1].cards
+                    ...players[0].cards
                   ]
                 },
                 players[1]
@@ -271,9 +263,18 @@ export default function UnoGame({ setHome, setSound, play }) {
               setDrawCards(cards => cards.slice(4));
               break;
           }
-        } else {
-          setSkip("Skip");
         }
+        setDeskCard(card => ({ ...card, skipped: true }));
+        setDesks(cards =>
+          cards.map(card => {
+            if (card.id === deskCard().id) {
+              return deskCard();
+            } else {
+              return card;
+            }
+          })
+        );
+        console.log(deskCard());
         setComputerThinking(false);
         setTurns({
           player: true,

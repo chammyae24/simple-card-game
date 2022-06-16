@@ -19,24 +19,7 @@ export default function PlayerCard(props) {
   } = props;
 
   const check = () => {
-    if (!desks()[0].skipped) {
-      setDesks(cards =>
-        cards.map(card => {
-          if (card.id === deskCard().id) {
-            return { ...card, skipped: true };
-          } else {
-            return card;
-          }
-        })
-      );
-
-      setCompute(computerPlay(players(), deskCard()));
-      setTurns({
-        player: false,
-        computer: true
-      });
-      return;
-    }
+    if (!desks()[0].skipped) return;
 
     setDesks(cards => [uno, ...cards]);
     setDeskCard(uno);
@@ -53,15 +36,28 @@ export default function PlayerCard(props) {
       setColorModal(true);
       return;
     }
-    // move to another player
-    // someFunction(player?, direction?)
+
     setCompute(computerPlay(players(), deskCard()));
+
+    setColorChosenFromComputer("");
+
     setTurns({
       player: false,
       computer: true
     });
-    setColorChosenFromComputer("");
-    return;
+
+    // if (
+    //   uno.role === "draw-2" ||
+    //   uno.role === "draw-4" ||
+    //   uno.role === "skip" ||
+    //   uno.role === "reverse"
+    // ) {
+    //   setDeskCard(card => ({ ...card, skip: true }));
+    //   setTurns({
+    //     player: true,
+    //     computer: false
+    //   });
+    // }
   };
 
   return (
