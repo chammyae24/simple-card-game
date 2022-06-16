@@ -290,6 +290,7 @@ export default function UnoGame({ setHome, setSound, play }) {
 
   createEffect(() => {
     if (players()[0].cards.length === 0) {
+      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "Computer",
@@ -297,6 +298,7 @@ export default function UnoGame({ setHome, setSound, play }) {
       });
     }
     if (players()[1].cards.length === 0) {
+      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "You",
@@ -305,14 +307,21 @@ export default function UnoGame({ setHome, setSound, play }) {
     }
   });
 
-  // createEffect(() => {
-  //   console.log(
-  //     players()[0].cards.length +
-  //       players()[1].cards.length +
-  //       drawCards().length +
-  //       desks().length
-  //   );
-  // });
+  createEffect(() => {
+    console.log(
+      players()[0].cards.length +
+        players()[1].cards.length +
+        drawCards().length +
+        desks().length
+    );
+  });
+
+  const skipHandle = () => {
+    setTurns({
+      player: false,
+      computer: true
+    });
+  };
 
   return (
     <>
@@ -378,9 +387,11 @@ export default function UnoGame({ setHome, setSound, play }) {
               setPlayers={setPlayers}
             />
             <h5 class="mt-2">Draw</h5>
-
+            <p class="cards-count">{drawCards().length} cards left.</p>
             <div id="skip-button">
-              <button class="btn btn-warning">SKIP</button>
+              <button class="btn btn-warning" onClick={skipHandle}>
+                SKIP
+              </button>
             </div>
           </div>
           <div id="desk">

@@ -1,5 +1,4 @@
 import { createSignal } from "solid-js";
-import { addToArray, removeArrayFromStart } from "../utils/utils";
 import "./cardBack.css";
 
 export default function CardBack(props) {
@@ -9,12 +8,13 @@ export default function CardBack(props) {
 
   const draw = () => {
     setClicked("clicked");
+    if (drawCards().length === 0) return;
     setPlayers(players => [
       players[0],
-      { ...players[1], cards: addToArray(players[1].cards, drawCards()[0]) }
+      { ...players[1], cards: [drawCards()[0], ...players[1].cards] }
     ]);
 
-    setDrawCards(cards => removeArrayFromStart(cards));
+    setDrawCards(cards => cards.slice(1));
 
     setTimeout(() => {
       setClicked("");

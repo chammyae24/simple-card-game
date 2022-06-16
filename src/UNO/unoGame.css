@@ -125,6 +125,14 @@
 #draw-card.click {
   left: 5px;
 }
+#draw-card .cards-count {
+  position: absolute;
+  top: 50%;
+  left: 90%;
+  width: 100%;
+  transform: translateY(-50%);
+  color: #ffd54d;
+}
 
 .load {
   animation: load 1s linear infinite;
