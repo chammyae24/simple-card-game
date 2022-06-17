@@ -4,7 +4,7 @@ import CardBack from "./Components/CardBack";
 
 import sfx1 from "../audio/card-sfx-02.wav";
 
-import { getCards, createPlayer, removeArrayFromStart } from "./utils/utils";
+import { getCards, createPlayer } from "./utils/utils";
 import { placeRandomCard, randomColor, computerPlay } from "./utils/gameLogic";
 
 import "./unoGame.css";
@@ -220,6 +220,9 @@ export default function UnoGame({ setHome, setSound, play }) {
               }, 1000);
               return;
             }
+            if (drawCards()[0].role === "change-color") {
+              setColorChosenFromComputer(randomColor());
+            }
           } else {
             setPlayers(players => [
               {
@@ -316,14 +319,14 @@ export default function UnoGame({ setHome, setSound, play }) {
   });
 
   createEffect(() => {
-    console.log(
-      players()[0].cards.length +
-        players()[1].cards.length +
-        drawCards().length +
-        desks().length
-    );
-    console.log("Computer: ", players()[0].cards);
-    console.log("Desks: ", desks());
+    // console.log(
+    //   players()[0].cards.length +
+    //     players()[1].cards.length +
+    //     drawCards().length +
+    //     desks().length
+    // );
+    // console.log("Computer: ", players()[0].cards);
+    // console.log("Desks: ", desks());
   });
 
   const skipHandle = () => {
@@ -427,6 +430,7 @@ export default function UnoGame({ setHome, setSound, play }) {
                 turns={turns}
                 setTurns={setTurns}
                 setColorChosenFromComputer={setColorChosenFromComputer}
+                colorChosenFromComputer={colorChosenFromComputer}
               />
             ))}
           </div>

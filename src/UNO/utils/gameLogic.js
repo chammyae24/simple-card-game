@@ -71,37 +71,6 @@ const chooseCard = (cards, desk, color) => {
   }
 };
 
-export const playerArrange = (id, direction) => {
-  let newId;
-  if (direction === "right") {
-    switch (id) {
-      case 1:
-        newId = 3;
-        break;
-      case 2:
-        newId = 1;
-        break;
-      case 3:
-        newId = 2;
-        break;
-    }
-    return newId;
-  } else {
-    switch (id) {
-      case 1:
-        newId = 2;
-        break;
-      case 2:
-        newId = 3;
-        break;
-      case 3:
-        newId = 1;
-        break;
-    }
-    return newId;
-  }
-};
-
 export const placeRandomCard = (players, card) => {
   let newCard;
   let index = Math.floor(Math.random() * players.cards.length);
@@ -110,4 +79,20 @@ export const placeRandomCard = (players, card) => {
     return newCard;
   }
   return null;
+};
+
+export const playerCardValidate = (pCard, dCard, color = "") => {
+  if (pCard.color === dCard.color || pCard.value === dCard.value) {
+    return true;
+  }
+
+  if (pCard.color === "black") {
+    return true;
+  }
+
+  if (dCard.role === "change-color" && pCard.color === color) {
+    return true;
+  }
+
+  return false;
 };
