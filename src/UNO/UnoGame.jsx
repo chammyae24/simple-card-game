@@ -116,7 +116,7 @@ export default function UnoGame({ setHome, setSound, play }) {
         break;
     }
 
-    let rand = placeRandomCard(players()[0], compute().card);
+    let rand = placeRandomCard(players()[0], card);
 
     setPlayers(players => [
       {
@@ -191,45 +191,37 @@ export default function UnoGame({ setHome, setSound, play }) {
           player: true,
           computer: false
         });
+        return;
       }, 1500);
-      return;
     } else if (!compute().canPlay && compute().draw === 1) {
       setComputerThinking(true);
       setTimeout(() => {
         if (drawCards().length > 0) {
-          setPlayers(players => [
-            {
-              ...players[0],
-              cards: [drawCards()[0], ...players[0].cards]
-            },
-            players[1]
-          ]);
           if (
             drawCards()[0].color === deskCard().color ||
             drawCards()[0].value === deskCard().value ||
             drawCards()[0].color === "black"
           ) {
+            setDesks(cards => [drawCards()[0], ...cards]);
+            setDeskCard(desks()[0]);
+          } else {
             setPlayers(players => [
               {
                 ...players[0],
-                cards: players[0].cards.filter(
-                  card => card.id !== drawCards()[0].id
-                )
+                cards: [drawCards()[0], ...players[0].cards]
               },
               players[1]
             ]);
-            setDesks(cards => [drawCards()[0], ...cards]);
-            setDeskCard(desks()[0]);
           }
-          setDrawCards(cards => removeArrayFromStart(cards));
+          setDrawCards(cards => cards.slice(1));
         }
         setComputerThinking(false);
         setTurns({
           player: true,
           computer: false
         });
+        return;
       }, 1500);
-      return;
     } else if (!compute().canPlay) {
       // Do somethings
       setComputerThinking(true);
@@ -280,6 +272,7 @@ export default function UnoGame({ setHome, setSound, play }) {
           player: true,
           computer: false
         });
+        return;
       }, 1500);
     }
   }
@@ -289,8 +282,8 @@ export default function UnoGame({ setHome, setSound, play }) {
   });
 
   createEffect(() => {
+    setComputerThinking(false);
     if (players()[0].cards.length === 0) {
-      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "Computer",
@@ -298,7 +291,6 @@ export default function UnoGame({ setHome, setSound, play }) {
       });
     }
     if (players()[1].cards.length === 0) {
-      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "You",
@@ -314,6 +306,8 @@ export default function UnoGame({ setHome, setSound, play }) {
         drawCards().length +
         desks().length
     );
+    console.log(players()[0].cards);
+    console.log(desks());
   });
 
   const skipHandle = () => {

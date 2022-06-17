@@ -109,5 +109,5 @@ export const placeRandomCard = (players, card) => {
     newCard = players.cards[index];
     return newCard;
   }
-  return card;
+  return null;
 };
