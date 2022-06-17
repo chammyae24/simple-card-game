@@ -2,10 +2,13 @@ import { createEffect, createSignal } from "solid-js";
 import { Link } from "solid-app-router";
 import CardBack from "./Components/CardBack";
 
-import sfx1 from "../audio/card-sfx-02.wav";
-
 import { getCards, createPlayer } from "./utils/utils";
-import { placeRandomCard, randomColor, computerPlay } from "./utils/gameLogic";
+import {
+  placeRandomCard,
+  randomColor,
+  computerPlay,
+  playerCardValidate
+} from "./utils/gameLogic";
 
 import "./unoGame.css";
 import DeskCard from "./Components/DeskCard";
@@ -115,31 +118,39 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
         break;
     }
 
-    let rand = placeRandomCard(players()[0], card);
-    console.log("Rabs: ", rand);
-    if (rand === null) return;
-
-    setPlayers(players => [
-      {
-        ...players[0],
-        cards: players[0].cards.filter(card => card.id !== rand.id)
-      },
-      players[1]
-    ]);
-
-    if (rand.role === "change-color") setColorChosenFromComputer(randomColor());
-
-    setDesks(cards => {
-      if (rand.id === cards[0].id) {
-        return cards;
-      } else {
-        return [rand, ...cards];
-      }
+    setDeskCard({
+      ...card,
+      skipped: true
     });
-    setDeskCard(desks()[0]);
-    // console.log(desks());
-    if (rand.role !== "numbers" && rand.role !== "change-color") {
-      randomCard(rand);
+
+    let rand = placeRandomCard(players()[0], card);
+    console.log("Rands: ", rand);
+    console.log("card: ", card);
+    if (rand !== null) {
+      setPlayers(players => [
+        {
+          ...players[0],
+          cards: players[0].cards.filter(card => card.id !== rand.card.id)
+        },
+        players[1]
+      ]);
+
+      if (rand.card.role === "change-color") {
+        setColorChosenFromComputer(rand.color);
+      }
+
+      setDesks(cards => {
+        if (rand.card.id === cards[0].id) {
+          return cards;
+        } else {
+          return [rand.card, ...cards];
+        }
+      });
+      setDeskCard(desks()[0]);
+      // console.log(desks());
+      if (rand.card.role !== "numbers" && rand.card.role !== "change-color") {
+        randomCard(rand.card);
+      }
     }
   }
 
@@ -153,6 +164,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
       setComputerThinking(true);
 
       setTimeout(() => {
+        console.log("Screen: ", compute());
         if (soundEffect() !== null) soundEffect().play();
 
         setPlayers(players => [
@@ -327,6 +339,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     //     desks().length
     // );
     console.log("Computer: ", players()[0].cards);
+    console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
   });
 

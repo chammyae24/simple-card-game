@@ -71,12 +71,17 @@ const chooseCard = (cards, desk, color) => {
 };
 
 export const placeRandomCard = (players, card) => {
-  let newCard;
   if (players.cards.length === 0) return null;
-  let index = Math.floor(Math.random() * players.cards.length);
-  if (card.role !== "numbers" && card.role !== "change-color") {
-    newCard = players.cards[index];
-    return newCard;
+  for (let i = 0; i < players.cards.length; i++) {
+    if (card.color === players.cards[i].color) {
+      return { card: players.cards[i] };
+    } else if (players.cards[i].role === "change-color") {
+      return { card: players.cards[i], color: randomColor() };
+    } else if (players.cards[i].role === "draw-4") {
+      return { card: players.cards[i] };
+    } else if (players.cards[i].color === "black") {
+      return { card: players.cards[0] };
+    }
   }
   return null;
 };

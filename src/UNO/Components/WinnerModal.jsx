@@ -6,7 +6,8 @@ export default function WinnerModal({ players, winner, setHome, refresh }) {
       <div style={modalCard}>
         <h2 style={modalHeader}>{winner().winner} wins</h2>
         <p class="mb-4">
-          {winner().loser} have {players()[1].cards.length} cards left.
+          {winner().loser} have{" "}
+          {players()[winner().loser === "You" ? 1 : 0].cards.length} cards left.
         </p>
         <div style={buttonContainer}>
           <button style={btn} class="btn" onClick={refresh}>
