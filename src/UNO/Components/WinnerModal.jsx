@@ -39,6 +39,7 @@ const modalCard = {
   color: "#ff0000",
   "text-align": "center",
   padding: "30px",
+  border: "3px solid #5b3fd8",
   "border-radius": "10px"
 };
 

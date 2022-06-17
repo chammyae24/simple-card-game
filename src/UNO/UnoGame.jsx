@@ -16,7 +16,7 @@ import Loadings from "./Components/Loadings";
 import WinnerModal from "./Components/WinnerModal";
 import Rules from "./Components/Rules";
 
-export default function UnoGame({ setHome, setSound, play }) {
+export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   // Get cards for each player by number (15)
   const [cards, setCards] = createSignal(getCards(15));
   // Get random arrange for player to get cards
@@ -82,8 +82,7 @@ export default function UnoGame({ setHome, setSound, play }) {
   };
 
   function randomCard(card) {
-    setSound(sfx1);
-    if (play() !== null) play().play();
+    if (soundEffect() !== null) soundEffect().play();
     switch (card.role) {
       case "skip":
       case "reverse":
@@ -149,12 +148,10 @@ export default function UnoGame({ setHome, setSound, play }) {
 
     if (compute().canPlay) {
       setComputerThinking(true);
-      setSound(sfx1);
 
       setTimeout(() => {
-        if (play() !== null) {
-          play().play();
-        }
+        if (soundEffect() !== null) soundEffect().play();
+
         setPlayers(players => [
           {
             ...players[0],
@@ -301,8 +298,8 @@ export default function UnoGame({ setHome, setSound, play }) {
   });
 
   createEffect(() => {
-    setComputerThinking(false);
     if (players()[0].cards.length === 0) {
+      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "Computer",
@@ -310,6 +307,7 @@ export default function UnoGame({ setHome, setSound, play }) {
       });
     }
     if (players()[1].cards.length === 0) {
+      setComputerThinking(false);
       setWinner({
         over: true,
         winner: "You",
@@ -325,7 +323,7 @@ export default function UnoGame({ setHome, setSound, play }) {
     //     drawCards().length +
     //     desks().length
     // );
-    // console.log("Computer: ", players()[0].cards);
+    console.log("Computer: ", players()[0].cards);
     // console.log("Desks: ", desks());
   });
 
@@ -419,7 +417,6 @@ export default function UnoGame({ setHome, setSound, play }) {
             {players()[1].cards.map(u => (
               <PlayerCard
                 uno={u}
-                desks={desks}
                 setDesks={setDesks}
                 setDeskCard={setDeskCard}
                 setPlayers={setPlayers}
@@ -431,6 +428,7 @@ export default function UnoGame({ setHome, setSound, play }) {
                 setTurns={setTurns}
                 setColorChosenFromComputer={setColorChosenFromComputer}
                 colorChosenFromComputer={colorChosenFromComputer}
+                soundEffect2={soundEffect2}
               />
             ))}
           </div>

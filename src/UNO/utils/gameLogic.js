@@ -6,11 +6,11 @@ export const computerPlay = (players, deskCard, color = "red") => {
   // choose a card to play
   const cardObj = chooseCard(playCards, deskCard, color);
 
-  if (cardObj === undefined) {
+  if (cardObj === null) {
     return { canPlay: false, card: null, draw: 1 };
   }
 
-  // console.log(cardObj);
+  console.log(cardObj);
   return cardObj;
 };
 
@@ -37,7 +37,7 @@ const chooseCard = (cards, desk, color) => {
         content = { canPlay: false, card: null, draw: 4 };
         break;
       default:
-        content = "";
+        content = null;
         break;
     }
     return content;
@@ -69,6 +69,8 @@ const chooseCard = (cards, desk, color) => {
       }
     }
   }
+
+  return null;
 };
 
 export const placeRandomCard = (players, card) => {
@@ -81,7 +83,7 @@ export const placeRandomCard = (players, card) => {
   return null;
 };
 
-export const playerCardValidate = (pCard, dCard, color = "") => {
+export const playerCardValidate = (pCard, dCard, color = null) => {
   if (pCard.color === dCard.color || pCard.value === dCard.value) {
     return true;
   }
@@ -90,7 +92,14 @@ export const playerCardValidate = (pCard, dCard, color = "") => {
     return true;
   }
 
+  // console.log(pCard.color);
+  // console.log(color);
+
   if (dCard.role === "change-color" && pCard.color === color) {
+    return true;
+  }
+
+  if (dCard.color === "black" && dCard.role !== "change-color") {
     return true;
   }
 

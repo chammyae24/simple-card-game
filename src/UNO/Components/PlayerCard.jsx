@@ -1,11 +1,10 @@
 import UnoCard from "./UnoCard";
 import { computerPlay, playerCardValidate } from "../utils/gameLogic";
-import { createEffect, createSignal } from "solid-js";
+import sfx3 from "../../audio/card-sfx-03.wav";
 
 export default function PlayerCard(props) {
   const {
     uno,
-    desks,
     setDesks,
     setDeskCard,
     setPlayers,
@@ -16,37 +15,40 @@ export default function PlayerCard(props) {
     turns,
     setTurns,
     setColorChosenFromComputer,
-    colorChosenFromComputer
+    colorChosenFromComputer,
+    soundEffect2
   } = props;
 
   const check = () => {
-    if (!playerCardValidate(uno, deskCard(), colorChosenFromComputer())) return;
-    if (!desks()[0].skipped) return;
+    if (!deskCard().skipped) return;
+    if (playerCardValidate(uno, deskCard(), colorChosenFromComputer())) {
+      if (soundEffect2() !== null) soundEffect2().play();
 
-    setDesks(cards => [uno, ...cards]);
-    setDeskCard(uno);
+      setDesks(cards => [uno, ...cards]);
+      setDeskCard(uno);
 
-    setPlayers(players => [
-      players[0],
-      {
-        ...players[1],
-        cards: players[1].cards.filter(player => player.id !== uno.id)
+      setPlayers(players => [
+        players[0],
+        {
+          ...players[1],
+          cards: players[1].cards.filter(player => player.id !== uno.id)
+        }
+      ]);
+
+      if (uno.role === "change-color") {
+        setColorModal(true);
+        return;
       }
-    ]);
 
-    if (uno.role === "change-color") {
-      setColorModal(true);
-      return;
+      setCompute(computerPlay(players(), deskCard()));
+
+      setColorChosenFromComputer("");
+
+      setTurns({
+        player: false,
+        computer: true
+      });
     }
-
-    setCompute(computerPlay(players(), deskCard()));
-
-    setColorChosenFromComputer("");
-
-    setTurns({
-      player: false,
-      computer: true
-    });
   };
 
   return (

@@ -5,28 +5,27 @@ import { createEffect, createSignal, onMount } from "solid-js";
 
 import music from "./audio/music.mp3";
 import Setting from "./Setting";
-// import sfx1 from "./audio/card-sfx.wav";
-// import sfx2 from "./audio/card-sfx-02.wav";
-// import sfx3 from "./audio/card-sfx-03.wav";
-// import sfx4 from "./audio/card-sfx-04.wav";
-// import sfx5 from "./audio/card-sfx-05.wav";
+import sfx2 from "./audio/card-sfx-02.wav";
+import sfx3 from "./audio/card-sfx-03.wav";
 
 function App() {
   const [home, setHome] = createSignal(true);
 
-  const [sound, setSound] = createSignal(null);
   const [bg, setBG] = createSignal(null);
-  const [play, setPlay] = createSignal(null);
+  const [soundEffect, setSoundEffect] = createSignal(null);
+  const [soundEffect2, setSoundEffect2] = createSignal(null);
   const [mute, setMute] = createSignal(true);
+  const [sfxMute, setSfxMute] = createSignal(true);
 
   let audioBg;
   let audioSound;
+  let audioSound2;
 
   onMount(() => {
-    // console.log(audioBg);
-    // if (mute()) return;
     audioSound.volume = 0.5;
-    setPlay(audioSound);
+    setSoundEffect(audioSound2);
+    audioSound2.volume = 0.5;
+    setSoundEffect2(audioSound);
     audioBg.volume = 0.5;
     audioBg.loop = true;
     setBG(audioBg);
@@ -43,11 +42,21 @@ function App() {
   });
 
   createEffect(() => {
+    if (sfxMute()) {
+      setSoundEffect(null);
+      setSoundEffect2(null);
+    } else {
+      setSoundEffect(audioSound);
+      setSoundEffect2(audioSound2);
+    }
+  });
+
+  createEffect(() => {
     if (useLocation().pathname !== "/") setHome(false);
   });
 
   createEffect(() => {
-    console.log(mute());
+    // console.log(mute());
   });
 
   return (
@@ -57,15 +66,25 @@ function App() {
         <Route
           path="/uno"
           element={
-            <UnoGame setHome={setHome} setSound={setSound} play={play} />
+            <UnoGame
+              setHome={setHome}
+              soundEffect={soundEffect}
+              soundEffect2={soundEffect2}
+            />
           }
         />
       </Routes>
 
-      <Setting setMute={setMute} mute={mute} />
+      <Setting
+        setMute={setMute}
+        mute={mute}
+        setSfxMute={setSfxMute}
+        sfxMute={sfxMute}
+      />
 
       <audio src={music} ref={audioBg}></audio>
-      <audio src={sound()} ref={audioSound}></audio>
+      <audio src={sfx3} ref={audioSound}></audio>
+      <audio src={sfx2} ref={audioSound2}></audio>
     </>
   );
 }
