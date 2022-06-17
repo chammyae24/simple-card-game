@@ -5,7 +5,7 @@ import CardBack from "./Components/CardBack";
 import sfx1 from "../audio/card-sfx-02.wav";
 
 import { getCards, createPlayer, removeArrayFromStart } from "./utils/utils";
-import { placeRandomCard, randomColor } from "./utils/gameLogic";
+import { placeRandomCard, randomColor, computerPlay } from "./utils/gameLogic";
 
 import "./unoGame.css";
 import DeskCard from "./Components/DeskCard";
@@ -204,6 +204,22 @@ export default function UnoGame({ setHome, setSound, play }) {
           ) {
             setDesks(cards => [drawCards()[0], ...cards]);
             setDeskCard(desks()[0]);
+            if (
+              drawCards()[0].role !== "numbers" &&
+              drawCards()[0].role !== "change-color"
+            ) {
+              setTimeout(() => {
+                setComputerThinking(true);
+                randomCard(drawCards()[0]);
+                setDrawCards(cards => cards.slice(1));
+                setComputerThinking(false);
+                setTurns({
+                  player: true,
+                  computer: false
+                });
+              }, 1000);
+              return;
+            }
           } else {
             setPlayers(players => [
               {
@@ -306,8 +322,8 @@ export default function UnoGame({ setHome, setSound, play }) {
         drawCards().length +
         desks().length
     );
-    console.log(players()[0].cards);
-    console.log(desks());
+    console.log("Computer: ", players()[0].cards);
+    console.log("Desks: ", desks());
   });
 
   const skipHandle = () => {
@@ -315,6 +331,7 @@ export default function UnoGame({ setHome, setSound, play }) {
       player: false,
       computer: true
     });
+    setCompute(computerPlay(players(), deskCard()));
   };
 
   return (
