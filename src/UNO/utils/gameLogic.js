@@ -6,11 +6,11 @@ export const computerPlay = (players, deskCard, color = "red") => {
   // choose a card to play
   const cardObj = chooseCard(playCards, deskCard, color);
 
-  if (cardObj === null) {
+  if (cardObj === undefined) {
     return { canPlay: false, card: null, draw: 1 };
   }
 
-  console.log(cardObj);
+  console.log("Logic: ", cardObj);
   return cardObj;
 };
 
@@ -35,9 +35,6 @@ const chooseCard = (cards, desk, color) => {
         break;
       case "draw-4":
         content = { canPlay: false, card: null, draw: 4 };
-        break;
-      default:
-        content = null;
         break;
     }
     return content;
@@ -70,11 +67,12 @@ const chooseCard = (cards, desk, color) => {
     }
   }
 
-  return null;
+  return undefined;
 };
 
 export const placeRandomCard = (players, card) => {
   let newCard;
+  if (players.cards.length === 0) return null;
   let index = Math.floor(Math.random() * players.cards.length);
   if (card.role !== "numbers" && card.role !== "change-color") {
     newCard = players.cards[index];
@@ -91,9 +89,6 @@ export const playerCardValidate = (pCard, dCard, color = null) => {
   if (pCard.color === "black") {
     return true;
   }
-
-  // console.log(pCard.color);
-  // console.log(color);
 
   if (dCard.role === "change-color" && pCard.color === color) {
     return true;

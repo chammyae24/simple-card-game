@@ -9,10 +9,12 @@ export default function ColorModal(props) {
     chosenColor,
     deskCard,
     setCompute,
-    setTurns
+    setTurns,
+    setColorChosenFromComputer
   } = props;
 
   const chooseColor = color => {
+    setColorChosenFromComputer(color);
     setChosenColor(color);
     setColorModal(false);
     setCompute(computerPlay(players(), deskCard(), chosenColor()));

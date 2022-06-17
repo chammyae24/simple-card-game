@@ -116,6 +116,8 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     }
 
     let rand = placeRandomCard(players()[0], card);
+    console.log("Rabs: ", rand);
+    if (rand === null) return;
 
     setPlayers(players => [
       {
@@ -147,6 +149,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     if (compute() === null) return;
 
     if (compute().canPlay) {
+      console.log("Screen: ", compute());
       setComputerThinking(true);
 
       setTimeout(() => {
@@ -355,6 +358,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
           deskCard={deskCard}
           setCompute={setCompute}
           setTurns={setTurns}
+          setColorChosenFromComputer={setColorChosenFromComputer}
         />
       )}
       {computerThinking() && <Loadings />}
