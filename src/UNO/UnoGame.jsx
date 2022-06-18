@@ -21,7 +21,7 @@ import Nav from "./Components/Nav";
 
 export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   // Get cards for each player by number (15)
-  const [cards, setCards] = createSignal(getCards(15));
+  const [cards, setCards] = createSignal(getCards(10));
   // Get random arrange for player to get cards
   const [players, setPlayers] = createSignal(createPlayer(cards()[0]));
 
@@ -63,7 +63,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   setTimeout(() => setInfo(false), 3000);
 
   const refresh = () => {
-    setCards(getCards(15));
+    setCards(getCards(10));
     setPlayers(createPlayer(cards()[0]));
     setDrawCards(cards()[1][1]);
     setDesks(cards()[1][0]);
@@ -358,12 +358,12 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   });
 
   createEffect(() => {
-    // console.log(
-    //   players()[0].cards.length +
-    //     players()[1].cards.length +
-    //     drawCards().length +
-    //     desks().length
-    // );
+    console.log(
+      players()[0].cards.length +
+        players()[1].cards.length +
+        drawCards().length +
+        desks().length
+    );
     // console.log("Computer: ", players()[0].cards);
     // console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
