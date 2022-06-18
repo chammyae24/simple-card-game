@@ -16,7 +16,8 @@ export default function PlayerCard(props) {
     setTurns,
     setColorChosenFromComputer,
     colorChosenFromComputer,
-    soundEffect2
+    soundEffect2,
+    setSkipable
   } = props;
 
   const check = () => {
@@ -36,6 +37,7 @@ export default function PlayerCard(props) {
           cards: players[1].cards.filter(player => player.id !== uno.id)
         }
       ]);
+      setSkipable(false);
 
       if (uno.role === "change-color") {
         setColorModal(true);

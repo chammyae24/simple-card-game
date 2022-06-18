@@ -2,7 +2,7 @@ import { createSignal } from "solid-js";
 import "./cardBack.css";
 
 export default function CardBack(props) {
-  const { size, vol, drawCards, setDrawCards, setPlayers } = props;
+  const { size, vol, drawCards, setDrawCards, setPlayers, setSkipable } = props;
 
   const [clicked, setClicked] = createSignal("");
 
@@ -15,6 +15,7 @@ export default function CardBack(props) {
     ]);
 
     setDrawCards(cards => cards.slice(1));
+    setSkipable(true);
 
     setTimeout(() => {
       setClicked("");

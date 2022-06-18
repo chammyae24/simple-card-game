@@ -323,7 +323,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
             }
           })
         );
-        console.log(deskCard());
+        // console.log(deskCard());
         setComputerThinking(false);
         setTurns({
           player: true,
@@ -375,7 +375,14 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
       computer: true
     });
     setCompute(computerPlay(players(), deskCard()));
+    setSkipable(false);
   };
+
+  const [skipable, setSkipable] = createSignal(false);
+
+  createEffect(() => {
+    if (drawCards().length === 0) setSkipable(true);
+  });
 
   return (
     <>
@@ -426,11 +433,15 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
               drawCards={drawCards}
               setDrawCards={setDrawCards}
               setPlayers={setPlayers}
+              setSkipable={setSkipable}
             />
             <h5 class="mt-2">Draw</h5>
             <p class="cards-count">{drawCards().length} cards left.</p>
             <div id="skip-button">
-              <button class="btn btn-warning" onClick={skipHandle}>
+              <button
+                class={`btn btn-warning ${!skipable() && "disabled"}`}
+                onClick={skipHandle}
+              >
                 SKIP
               </button>
             </div>
@@ -458,6 +469,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
                 setColorChosenFromComputer={setColorChosenFromComputer}
                 colorChosenFromComputer={colorChosenFromComputer}
                 soundEffect2={soundEffect2}
+                setSkipable={setSkipable}
               />
             ))}
           </div>
