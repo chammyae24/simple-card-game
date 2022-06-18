@@ -8,7 +8,7 @@ export default function Home({ setHome }) {
           UNO
         </Link>
       </div>
-      <div style={linkContainer}>
+      {/* <div style={linkContainer}>
         <Link style={link} href="/123">
           Coming Soon...
         </Link>
@@ -17,7 +17,7 @@ export default function Home({ setHome }) {
         <Link style={link} href="/456">
           Coming Soon...
         </Link>
-      </div>
+      </div> */}
     </div>
   );
 }
