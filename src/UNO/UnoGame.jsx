@@ -358,12 +358,12 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   });
 
   createEffect(() => {
-    console.log(
-      players()[0].cards.length +
-        players()[1].cards.length +
-        drawCards().length +
-        desks().length
-    );
+    // console.log(
+    //   players()[0].cards.length +
+    //     players()[1].cards.length +
+    //     drawCards().length +
+    //     desks().length
+    // );
     // console.log("Computer: ", players()[0].cards);
     // console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
