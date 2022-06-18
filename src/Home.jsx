@@ -9,11 +9,11 @@ export default function Home({ setHome }) {
         </Link>
       </div>
       {/* <div style={linkContainer}>
-        <Link style={link} href="/123">
-          Coming Soon...
+        <Link style={link} href="/black-jack">
+          BlackJack
         </Link>
-      </div>
-      <div style={linkContainer}>
+      </div> */}
+      {/* <div style={linkContainer}>
         <Link style={link} href="/456">
           Coming Soon...
         </Link>
@@ -31,6 +31,7 @@ const home = {
 };
 
 const link = {
+  display: "block",
   "text-decoration": "none",
   color: "white",
   "font-size": "20px",
@@ -45,5 +46,6 @@ const linkContainer = {
   padding: "7px",
   "border-radius": "5px",
   margin: "5px 0",
-  "box-shadow": "10px 10px 10px rgba(0,0,0,0.5)"
+  "box-shadow": "10px 10px 10px rgba(0,0,0,0.5)",
+  cursor: "pointer"
 };
