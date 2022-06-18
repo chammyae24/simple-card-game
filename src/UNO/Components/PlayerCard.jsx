@@ -20,8 +20,8 @@ export default function PlayerCard(props) {
   } = props;
 
   const check = () => {
-    console.log(deskCard());
-    console.log(playerCardValidate(uno, deskCard(), colorChosenFromComputer()));
+    // console.log(deskCard());
+    // console.log(playerCardValidate(uno, deskCard(), colorChosenFromComputer()));
     if (!deskCard().skipped) return;
     if (playerCardValidate(uno, deskCard(), colorChosenFromComputer())) {
       if (soundEffect2() !== null) soundEffect2().play();

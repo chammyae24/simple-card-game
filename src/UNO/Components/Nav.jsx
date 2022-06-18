@@ -9,7 +9,7 @@ export default function Nav({ setHome, setInfo, refresh }) {
           class="btn d-flex justify-content-center align-items-center text-warning"
           onClick={() => setInfo(i => !i)}
         >
-          <i class="fa-solid fa-lightbulb"></i>
+          <i class="fa-solid fa-circle-info"></i>
         </button>
         <Link href="/" onClick={() => setHome(true)} style={ref}>
           Home

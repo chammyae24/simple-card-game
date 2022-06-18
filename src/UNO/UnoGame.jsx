@@ -86,6 +86,12 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
 
   function randomCard(card) {
     if (soundEffect() !== null) soundEffect().play();
+    if (drawCards().length === 0) {
+      // skip turn
+      // skip turn
+      setDeskCard(card => ({ ...card, skipped: true }));
+      return;
+    }
     switch (card.role) {
       case "skip":
       case "reverse":
@@ -124,8 +130,9 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     });
 
     let rand = placeRandomCard(players()[0], card);
-    console.log("Rands: ", rand);
-    console.log("card: ", card);
+    // console.log("Rands: ", rand);
+    // console.log("card: ", card);
+
     if (rand !== null) {
       setPlayers(players => [
         {
@@ -151,6 +158,25 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
       if (rand.card.role !== "numbers" && rand.card.role !== "change-color") {
         randomCard(rand.card);
       }
+    } else {
+      if (drawCards().length === 0) {
+        // skip turn
+        setDeskCard(card => ({ ...card, skipped: true }));
+        return;
+      }
+      if (drawCards()[0].color === card.color) {
+        setDesks(cards => [drawCards()[0], ...cards]);
+        setDeskCard(desks()[0]);
+      } else {
+        setPlayers(players => [
+          {
+            ...players[0],
+            cards: [drawCards()[0], ...players[0].cards]
+          },
+          players[1]
+        ]);
+      }
+      setDrawCards(cards => cards.slice(1));
     }
   }
 
@@ -160,11 +186,11 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     if (compute() === null) return;
 
     if (compute().canPlay) {
-      console.log("Screen: ", compute());
+      // console.log("Screen: ", compute());
       setComputerThinking(true);
 
       setTimeout(() => {
-        console.log("Screen: ", compute());
+        // console.log("Screen: ", compute());
         if (soundEffect() !== null) soundEffect().play();
 
         setPlayers(players => [
@@ -338,8 +364,8 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     //     drawCards().length +
     //     desks().length
     // );
-    console.log("Computer: ", players()[0].cards);
-    console.log("Player Cards: ", players()[1].cards.length);
+    // console.log("Computer: ", players()[0].cards);
+    // console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
   });
 

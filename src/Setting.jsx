@@ -56,7 +56,7 @@ export default function Setting({ setMute, mute, setSfxMute, sfxMute }) {
         }}
         onClick={() => setShow(s => !s)}
       >
-        <i class="fas fa-vest-patches"></i>
+        <i class="fa-solid fa-brush"></i>
       </div>
       {show() && (
         <div style={themeContainer}>

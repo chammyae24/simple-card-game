@@ -10,7 +10,7 @@ export const computerPlay = (players, deskCard, color = "red") => {
     return { canPlay: false, card: null, draw: 1 };
   }
 
-  console.log("Logic: ", cardObj);
+  // console.log("Logic: ", cardObj);
   return cardObj;
 };
 
