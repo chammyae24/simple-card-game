@@ -79,7 +79,7 @@ export const placeRandomCard = (players, card) => {
       return { card: players.cards[i], color: randomColor() };
     } else if (players.cards[i].role === "draw-4") {
       return { card: players.cards[i] };
-    } else if (players.cards[i].color === "black") {
+    } else if (card.color === "black") {
       return { card: players.cards[0] };
     }
   }

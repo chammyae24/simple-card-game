@@ -1,5 +1,4 @@
 import { createEffect, createSignal } from "solid-js";
-import { Link } from "solid-app-router";
 import CardBack from "./Components/CardBack";
 
 import { getCards, createPlayer } from "./utils/utils";
@@ -18,6 +17,7 @@ import ColorModal from "./Components/ColorModal";
 import Loadings from "./Components/Loadings";
 import WinnerModal from "./Components/WinnerModal";
 import Rules from "./Components/Rules";
+import Nav from "./Components/Nav";
 
 export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   // Get cards for each player by number (15)
@@ -375,21 +375,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
         />
       )}
       {computerThinking() && <Loadings />}
-      <div id="back">
-        <p>UNO</p>
-        <div class="link-container">
-          <button
-            class="btn d-flex justify-content-center align-items-center text-warning"
-            onClick={() => setInfo(i => !i)}
-          >
-            <i class="fa-solid fa-lightbulb"></i>
-          </button>
-          <Link href="/" onClick={() => setHome(true)}>
-            Home
-          </Link>
-          <a onClick={refresh}>Refresh</a>
-        </div>
-      </div>
+      <Nav setHome={setHome} setInfo={setInfo} refresh={refresh} />
       <div id="game">
         <div id="computer">
           <div id="computer-1">
