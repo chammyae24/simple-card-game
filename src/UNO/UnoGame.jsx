@@ -95,6 +95,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     switch (card.role) {
       case "skip":
       case "reverse":
+        setDeskCard(card => ({ ...card, skipped: true }));
         break;
       case "draw-2":
         setPlayers(players => [
@@ -183,7 +184,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   function computerPlaying() {
     if (!turns().computer) return;
 
-    if (compute() === null) return;
+    if (compute() === undefined) return;
 
     if (compute().canPlay) {
       // console.log("Screen: ", compute());
