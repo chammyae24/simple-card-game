@@ -77,11 +77,6 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
       player: true,
       computer: false
     });
-    setWinner({
-      over: false,
-      winner: "",
-      loser: ""
-    });
   };
 
   function randomCard(card) {
@@ -365,7 +360,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     //     drawCards().length +
     //     desks().length
     // );
-    // console.log("Computer: ", players()[0].cards);
+    console.log("Computer: ", players()[0].cards);
     // console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
   });
@@ -382,7 +377,21 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
   const [skipable, setSkipable] = createSignal(false);
 
   createEffect(() => {
-    if (drawCards().length === 0) setSkipable(true);
+    if (
+      drawCards().length === 0 ||
+      deskCard().role === "skip" ||
+      deskCard().role === "reverse"
+    ) {
+      setSkipable(true);
+    } else {
+      setSkipable(false);
+    }
+  });
+
+  createEffect(() => {
+    if (winner().over) {
+      setComputerThinking(false);
+    }
   });
 
   return (
@@ -392,6 +401,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
         <WinnerModal
           players={players}
           winner={winner}
+          setWinner={setWinner}
           setHome={setHome}
           refresh={refresh}
         />
@@ -423,11 +433,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
           </div>
         </div>
         <div id="table">
-          <div
-            id="draw-card"
-            class={`${click() && "click"}`}
-            onClick={() => setClick(c => !c)}
-          >
+          <div id="draw-card" class={`${click() && "click"}`}>
             <CardBack
               size={{ width: "60px", height: "85px" }}
               vol="volume"
@@ -436,7 +442,9 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
               setPlayers={setPlayers}
               setSkipable={setSkipable}
             />
-            <h5 class="mt-2">Draw</h5>
+            <h5 class="mt-2" onClick={() => setClick(c => !c)}>
+              Draw
+            </h5>
             <p class="cards-count">{drawCards().length} cards left.</p>
             <div id="skip-button">
               <button

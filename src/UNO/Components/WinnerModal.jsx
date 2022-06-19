@@ -1,6 +1,20 @@
 import { Link } from "solid-app-router";
 
-export default function WinnerModal({ players, winner, setHome, refresh }) {
+export default function WinnerModal({
+  players,
+  winner,
+  setWinner,
+  setHome,
+  refresh
+}) {
+  const closeWinner = () => {
+    setWinner({
+      over: false,
+      winner: "",
+      loser: ""
+    });
+    refresh();
+  };
   return (
     <div style={modalBackground}>
       <div style={modalCard}>
@@ -10,7 +24,7 @@ export default function WinnerModal({ players, winner, setHome, refresh }) {
           {players()[winner().loser === "You" ? 1 : 0].cards.length} cards left.
         </p>
         <div style={buttonContainer}>
-          <button style={btn} class="btn" onClick={refresh}>
+          <button style={btn} class="btn" onClick={closeWinner}>
             Play Again
           </button>
           <Link style={btn} class="btn" href="/" onClick={() => setHome(true)}>

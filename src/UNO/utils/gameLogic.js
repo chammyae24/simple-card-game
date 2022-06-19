@@ -87,7 +87,14 @@ export const placeRandomCard = (players, card) => {
 };
 
 export const playerCardValidate = (pCard, dCard, color = null) => {
-  if (pCard.color === dCard.color || pCard.value === dCard.value) {
+  if (
+    pCard.color === dCard.color ||
+    (pCard.role === "numbers" && pCard.value === dCard.value)
+  ) {
+    return true;
+  }
+
+  if (pCard.role !== "numbers" && pCard.role === dCard.role) {
     return true;
   }
 
@@ -99,7 +106,7 @@ export const playerCardValidate = (pCard, dCard, color = null) => {
     return true;
   }
 
-  if (dCard.color === "black" && dCard.role !== "change-color") {
+  if (dCard.color === "black" && dCard.role === "draw-4") {
     return true;
   }
 
