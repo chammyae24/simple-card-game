@@ -13,11 +13,11 @@ export default function Home({ setHome }) {
           Memo
         </Link>
       </div>
-      {/* <div style={linkContainer}>
-        <Link style={link} href="/456">
-          Coming Soon...
+      <div style={linkContainer}>
+        <Link style={link} href="/monte">
+          3Card Monte
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 }

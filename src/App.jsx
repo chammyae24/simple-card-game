@@ -8,6 +8,7 @@ import Setting from "./Setting";
 import sfx2 from "./audio/card-sfx-02.wav";
 import sfx3 from "./audio/card-sfx-03.wav";
 import MemoryGame from "./Memory/MemoryGame";
+import MonteGame from "./Monte/MonteGame";
 
 function App() {
   const [home, setHome] = createSignal(true);
@@ -79,6 +80,16 @@ function App() {
           path="/memory"
           element={
             <MemoryGame
+              setHome={setHome}
+              soundEffect={soundEffect}
+              soundEffect2={soundEffect2}
+            />
+          }
+        />
+        <Route
+          path="/monte"
+          element={
+            <MonteGame
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}
