@@ -1,5 +1,5 @@
 {
-  "redircet": [
+  "redirects": [
     {
       "source": "/",
       "destination": "./src/Home.jsx"
