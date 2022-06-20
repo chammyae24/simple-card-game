@@ -117,10 +117,8 @@ const game = {
 };
 
 const cardContainer = {
-  display: "flex",
-  "justify-content": "center",
-  "align-items": "center",
-  "flex-wrap": "wrap",
+  display: "grid",
+  "grid-template-columns": "repeat(4, 1fr)",
   gap: "10px"
 };
 
