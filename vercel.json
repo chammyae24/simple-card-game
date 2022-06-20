@@ -1,3 +1,7 @@
 {
-  "redirects": [{ "source": "/(.*)", "destination": "/" }]
+  "redirects": [
+    { "source": "/", "destination": "/" },
+    { "source": "/uno", "destination": "/" },
+    { "source": "/memory", "destination": "/" }
+  ]
 }
