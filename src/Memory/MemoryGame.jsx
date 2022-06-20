@@ -22,6 +22,7 @@ export default function MemoryGame({ setHome, soundEffect, soundEffect2 }) {
 
   const shuffle = () => {
     setMemo(getMemoCards(memoCards));
+    setCheckMemo([]);
     setArrayMatch([]);
     setWinMemo({
       over: false,
