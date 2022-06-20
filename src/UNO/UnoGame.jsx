@@ -360,7 +360,7 @@ export default function UnoGame({ setHome, soundEffect, soundEffect2 }) {
     //     drawCards().length +
     //     desks().length
     // );
-    console.log("Computer: ", players()[0].cards);
+    // console.log("Computer: ", players()[0].cards);
     // console.log("Player Cards: ", players()[1].cards.length);
     // console.log("Desks: ", desks());
   });
