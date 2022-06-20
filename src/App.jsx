@@ -62,8 +62,9 @@ function App() {
 
   return (
     <>
-      {home() && <Home setHome={setHome} />}
+      {/* {home() && <Home setHome={setHome} />} */}
       <Routes>
+        <Route path="/" element={<Home setHome={setHome} />} />
         <Route
           path="/uno"
           element={

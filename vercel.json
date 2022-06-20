@@ -1,0 +1,16 @@
+{
+  "redircet": [
+    {
+      "source": "/",
+      "destination": "./src/Home.jsx"
+    },
+    {
+      "source": "/uno",
+      "destination": "./src/UNO/UnoGame.jsx"
+    },
+    {
+      "source": "/memory",
+      "destination": "./src/Memory/MemoryGame.jsx"
+    }
+  ]
+}
