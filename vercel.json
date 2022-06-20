@@ -1,7 +1,7 @@
-{
-  "redirects": [
-    { "source": "/", "destination": "/" },
-    { "source": "/uno", "destination": "/" },
-    { "source": "/memory", "destination": "/" }
-  ]
-}
+// {
+  // "redirects": [
+  //   { "source": "/", "destination": "/" },
+  //   { "source": "/uno", "destination": "/" },
+  //   { "source": "/memory", "destination": "/" }
+  // ]
+// }
