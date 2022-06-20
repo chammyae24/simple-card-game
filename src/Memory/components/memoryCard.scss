@@ -1,0 +1,85 @@
+.flip {
+  cursor: pointer;
+  position: relative;
+
+  width: 85px;
+
+  .memo-card {
+    background-color: #fff;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    color: #000;
+  }
+
+  .memo-card.back {
+    position: absolute;
+    top: 0;
+    backface-visibility: hidden;
+    transform: rotateY(0deg);
+    transition: transform 500ms ease-in-out;
+
+    background-color: #e5e5f7;
+    background-image: linear-gradient(
+      to right,
+      #ff8800,
+      #ff8800 5px,
+      #e5e5f7 5px,
+      #e5e5f7
+    );
+    background-size: 10px 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 80%;
+      padding: 0.5rem 1rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      font-size: 1rem;
+      color: #fff;
+      font-family: Fredoka One, cursive;
+      border: 5px solid #fff;
+      border-radius: 50%;
+    }
+  }
+
+  .memo-card.front {
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+    transition: transform 500ms ease-in-out;
+
+    background-color: #ff8800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 45px;
+
+      border-radius: 5px;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+.flip.flipped {
+  .memo-card.front {
+    transform: rotateY(0deg);
+  }
+  .memo-card.back {
+    transform: rotateY(180deg);
+  }
+}

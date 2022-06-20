@@ -8,11 +8,11 @@ export default function Home({ setHome }) {
           UNO
         </Link>
       </div>
-      {/* <div style={linkContainer}>
-        <Link style={link} href="/black-jack">
-          BlackJack
+      <div style={linkContainer}>
+        <Link style={link} href="/memory">
+          Memo
         </Link>
-      </div> */}
+      </div>
       {/* <div style={linkContainer}>
         <Link style={link} href="/456">
           Coming Soon...

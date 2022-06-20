@@ -5,6 +5,7 @@ export default function Setting({ setMute, mute, setSfxMute, sfxMute }) {
   const [fgColor, setFgColor] = createSignal("#007b1a");
 
   const [show, setShow] = createSignal(false);
+  const [show2, setShow2] = createSignal(false);
 
   const bgChange = e => {
     // console.log(e.target.value);
@@ -31,33 +32,47 @@ export default function Setting({ setMute, mute, setSfxMute, sfxMute }) {
       <div
         style={{
           ...btnContainer,
-          "--color-c": mute() ? "#fff" : "#ffc107",
-          opacity: mute() ? 0.5 : 1
+          "--color-c": !show2() ? "#fff" : "#ffc107",
+          opacity: !show2() ? 0.5 : 1
         }}
-        onClick={() => setMute(m => !m)}
+        onClick={() => setShow2(s => !s)}
       >
-        <i class="fa-solid fa-music"></i>
+        <i class="fa-solid fa-angle-down"></i>
       </div>
-      <div
-        style={{
-          ...btnContainer,
-          "--color-c": sfxMute() ? "#fff" : "#ffc107",
-          opacity: sfxMute() ? 0.5 : 1
-        }}
-        onClick={() => setSfxMute(m => !m)}
-      >
-        <i class="fas fa-volume-up"></i>
-      </div>
-      <div
-        style={{
-          ...btnContainer,
-          "--color-c": show() ? "#fff" : "#ffc107",
-          opacity: show() ? 0.5 : 1
-        }}
-        onClick={() => setShow(s => !s)}
-      >
-        <i class="fa-solid fa-brush"></i>
-      </div>
+      {show2() && (
+        <>
+          <div
+            style={{
+              ...btnContainer,
+              "--color-c": mute() ? "#fff" : "#ffc107",
+              opacity: mute() ? 0.5 : 1
+            }}
+            onClick={() => setMute(m => !m)}
+          >
+            <i class="fa-solid fa-music"></i>
+          </div>
+          <div
+            style={{
+              ...btnContainer,
+              "--color-c": sfxMute() ? "#fff" : "#ffc107",
+              opacity: sfxMute() ? 0.5 : 1
+            }}
+            onClick={() => setSfxMute(m => !m)}
+          >
+            <i class="fas fa-volume-up"></i>
+          </div>
+          <div
+            style={{
+              ...btnContainer,
+              "--color-c": show() ? "#fff" : "#ffc107",
+              opacity: show() ? 0.5 : 1
+            }}
+            onClick={() => setShow(s => !s)}
+          >
+            <i class="fa-solid fa-brush"></i>
+          </div>
+        </>
+      )}
       {show() && (
         <div style={themeContainer}>
           <div style={colorChoose}>
@@ -78,14 +93,16 @@ export default function Setting({ setMute, mute, setSfxMute, sfxMute }) {
 }
 
 const settingContainer = {
-  background: "rgba(0,0,0,0.5)",
+  background: "rgba(0,0,0,0.7)",
   width: "50px",
   "border-radius": "10px 0 0 10px",
   padding: "10px",
   position: "absolute",
   top: "50%",
   right: 0,
-  transform: "translateY(-50%)"
+  transform: "translateY(-50%)",
+  transition: "transform 0.3s ease-in-out"
+  // "overflow-x": "hidden"
 };
 
 const btnContainer = {
@@ -95,7 +112,7 @@ const btnContainer = {
   border: "1px solid var(--color-c)",
   color: "var(--color-c)",
   "border-radius": "50%",
-  margin: "10px 0",
+  margin: "10px 0 ",
   display: "flex",
   "justify-content": "center",
   "align-items": "center",

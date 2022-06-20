@@ -7,6 +7,7 @@ import music from "./audio/music.mp3";
 import Setting from "./Setting";
 import sfx2 from "./audio/card-sfx-02.wav";
 import sfx3 from "./audio/card-sfx-03.wav";
+import MemoryGame from "./Memory/MemoryGame";
 
 function App() {
   const [home, setHome] = createSignal(true);
@@ -15,7 +16,7 @@ function App() {
   const [soundEffect, setSoundEffect] = createSignal(null);
   const [soundEffect2, setSoundEffect2] = createSignal(null);
   const [mute, setMute] = createSignal(true);
-  const [sfxMute, setSfxMute] = createSignal(true);
+  const [sfxMute, setSfxMute] = createSignal(false);
 
   let audioBg;
   let audioSound;
@@ -67,6 +68,16 @@ function App() {
           path="/uno"
           element={
             <UnoGame
+              setHome={setHome}
+              soundEffect={soundEffect}
+              soundEffect2={soundEffect2}
+            />
+          }
+        />
+        <Route
+          path="/memory"
+          element={
+            <MemoryGame
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}
