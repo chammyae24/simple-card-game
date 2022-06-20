@@ -17,6 +17,7 @@ export default function MemoryCard(props) {
 
   const startMemo = () => {
     // setFlip(true);
+    soundEffect2().currentTime = 0;
     soundEffect2().play();
     setMemoCard(memo => ({ ...memo, flip: true }));
     setCheckMemo(cards => [...cards, memoCard()]);
