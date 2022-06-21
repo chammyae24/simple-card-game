@@ -47,6 +47,9 @@ export default function MonteGame({
       founded: false
     });
     setMonteCards(shuffle(cardArray));
+    setTimeout(() => {
+      shuffleSfx().pause();
+    }, 3000);
   };
 
   createEffect(() => {
