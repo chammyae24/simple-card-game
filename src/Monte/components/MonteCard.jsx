@@ -16,7 +16,8 @@ export default function MonteCard(props) {
     setPoints,
     refresh,
     soundEffect2,
-    soundEffect
+    soundEffect,
+    winSfx
   } = props;
 
   const [flipMonte, setFlipMonte] = createSignal(false);
@@ -28,6 +29,8 @@ export default function MonteCard(props) {
     // console.log(card);
     setTimeout(() => {
       if (card.value === "queen") {
+        winSfx().currentTime = 0;
+        winSfx().play();
         setMonteWin({
           over: true,
           founded: true

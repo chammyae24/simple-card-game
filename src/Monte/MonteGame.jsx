@@ -8,13 +8,24 @@ import "./Monte.scss";
 import { shuffle } from "./utils";
 import { createEffect } from "solid-js";
 
+// audio
+import shuffelSound from "../audio/shuffel.wav";
+import { onMount } from "solid-js";
+
 const cardArray = [
   { id: 1, value: "queen", text: "Q", color: "red", symbol: "heart" },
   { id: 2, value: "8", text: "8", color: "black", symbol: "club" },
   { id: 3, value: "9", text: "9", color: "black", symbol: "spade" }
 ];
+let shuffelAudio;
 
-export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
+export default function MonteGame({
+  setHome,
+  soundEffect,
+  soundEffect2,
+  winSfx,
+  loseSfx
+}) {
   const [monteCards, setMonteCards] = createSignal(shuffle(cardArray));
   const [restart, setRestart] = createSignal(false);
 
@@ -27,6 +38,10 @@ export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
 
   const refresh = () => {
     setRestart(true);
+    if (shuffleSfx() !== null) {
+      shuffleSfx().currentTime = 0;
+      shuffleSfx().play();
+    }
     setMonteWin({
       over: false,
       founded: false
@@ -48,11 +63,18 @@ export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
         over: true,
         founded: false
       });
+      loseSfx().currentTime = 0;
+      loseSfx().play();
     }
 
     if (monteWin().over) {
       setPoints(5);
     }
+  });
+
+  const [shuffleSfx, setShuffleSfx] = createSignal(null);
+  onMount(() => {
+    setShuffleSfx(shuffelAudio);
   });
 
   return (
@@ -78,12 +100,13 @@ export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
             setPoints={setPoints}
             soundEffect={soundEffect}
             soundEffect2={soundEffect2}
+            winSfx={winSfx}
           />
         ))}
       </div>
       <div style={btnContainer}>
         <button style={btn} class="btn" onClick={refresh}>
-          {monteWin().founded ? "Play Again" : "Shuffle"}
+          {monteWin().over ? "Play Again" : "Shuffle"}
         </button>
       </div>
       <h2 style={point} class="text-center my-3">
@@ -98,6 +121,7 @@ export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
           </div>
         </div>
       )}
+      <audio src={shuffelSound} ref={shuffelAudio}></audio>
     </div>
   );
 }

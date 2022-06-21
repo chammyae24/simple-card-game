@@ -7,6 +7,8 @@ import music from "./audio/music.mp3";
 import Setting from "./Setting";
 import sfx2 from "./audio/card-sfx-02.wav";
 import sfx3 from "./audio/card-sfx-03.wav";
+import winSound from "./audio/win.mp3";
+import loseSound from "./audio/lose.mp3";
 import MemoryGame from "./Memory/MemoryGame";
 import MonteGame from "./Monte/MonteGame";
 
@@ -19,9 +21,14 @@ function App() {
   const [mute, setMute] = createSignal(true);
   const [sfxMute, setSfxMute] = createSignal(false);
 
+  const [winSfx, setWinSfx] = createSignal(null);
+  const [loseSfx, setLoseSfx] = createSignal(null);
+
   let audioBg;
   let audioSound;
   let audioSound2;
+  let audioWin;
+  let audioLose;
 
   onMount(() => {
     audioSound.volume = 0.5;
@@ -31,6 +38,11 @@ function App() {
     audioBg.volume = 0.5;
     audioBg.loop = true;
     setBG(audioBg);
+
+    audioWin.volume = 0.5;
+    setWinSfx(audioWin);
+    audioLose.volume = 0.5;
+    setLoseSfx(audioLose);
   });
 
   createEffect(() => {
@@ -57,10 +69,6 @@ function App() {
     if (useLocation().pathname !== "/") setHome(false);
   });
 
-  createEffect(() => {
-    // console.log(mute());
-  });
-
   return (
     <>
       {/* {home() && <Home setHome={setHome} />} */}
@@ -73,6 +81,8 @@ function App() {
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}
+              winSfx={winSfx}
+              loseSfx={loseSfx}
             />
           }
         />
@@ -83,6 +93,8 @@ function App() {
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}
+              winSfx={winSfx}
+              loseSfx={loseSfx}
             />
           }
         />
@@ -93,6 +105,8 @@ function App() {
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}
+              winSfx={winSfx}
+              loseSfx={loseSfx}
             />
           }
         />
@@ -108,6 +122,8 @@ function App() {
       <audio src={music} ref={audioBg}></audio>
       <audio src={sfx3} ref={audioSound}></audio>
       <audio src={sfx2} ref={audioSound2}></audio>
+      <audio src={winSound} ref={audioWin}></audio>
+      <audio src={loseSound} ref={audioLose}></audio>
     </>
   );
 }
