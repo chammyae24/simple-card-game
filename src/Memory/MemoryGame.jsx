@@ -93,7 +93,12 @@ export default function MemoryGame({ setHome, soundEffect, soundEffect2 }) {
         </div>
       </div>
       {winMemo().over && (
-        <WinMemo setHome={setHome} shuffle={shuffle} winMemo={winMemo} />
+        <WinMemo
+          setHome={setHome}
+          shuffle={shuffle}
+          winMemo={winMemo}
+          sec={sec}
+        />
       )}
     </div>
   );

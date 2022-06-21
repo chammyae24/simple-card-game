@@ -9,9 +9,9 @@ import { shuffle } from "./utils";
 import { createEffect } from "solid-js";
 
 const cardArray = [
-  { id: 1, value: "queen", text: "Q", color: "red", symbol: "♥" },
-  { id: 2, value: "A", text: "A", color: "black", symbol: "♣" },
-  { id: 3, value: "9", text: "9", color: "black", symbol: "♠" }
+  { id: 1, value: "queen", text: "Q", color: "red", symbol: "heart" },
+  { id: 2, value: "8", text: "8", color: "black", symbol: "club" },
+  { id: 3, value: "9", text: "9", color: "black", symbol: "spade" }
 ];
 
 export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
@@ -76,6 +76,8 @@ export default function MonteGame({ setHome, soundEffect, soundEffect2 }) {
             setMonteWin={setMonteWin}
             refresh={refresh}
             setPoints={setPoints}
+            soundEffect={soundEffect}
+            soundEffect2={soundEffect2}
           />
         ))}
       </div>

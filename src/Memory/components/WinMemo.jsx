@@ -1,17 +1,23 @@
 import { Link } from "solid-app-router";
 
-export default function WinMemo({ setHome, shuffle, winMemo }) {
+export default function WinMemo({ setHome, shuffle, winMemo, sec }) {
   return (
     <div style={modalBackground}>
       <div style={modalCard}>
         <h1 style={modalHeader}>You{winMemo().win ? " Win!😁" : " Lose!😭"}</h1>
         {winMemo().win ? (
-          <p>Congratulations!</p>
+          <>
+            <h5>Congratulations!</h5>
+            <p>You matched all the cards within {60 - sec()} seconds</p>
+          </>
         ) : (
-          <p>
-            You have {winMemo().left} pair{winMemo().left > 1 ? "s" : ""} left
-            to win.
-          </p>
+          <>
+            <h5>Sorry!</h5>
+            <p>
+              You have {winMemo().left} pair{winMemo().left > 1 ? "s" : ""} left
+              to win.
+            </p>
+          </>
         )}
         <div style={buttonContainer}>
           <Link href="/" style={btn} class="btn" onClick={() => setHome(true)}>
