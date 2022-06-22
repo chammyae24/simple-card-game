@@ -1,10 +1,10 @@
 import { createSignal } from "solid-js";
-import queenPic from "../../assets/playing-cards-icon-8.jpg";
 
 import Club from "../../Cards/Club";
 import Diamond from "../../Cards/Diamond";
 import Heart from "../../Cards/Heart";
 import Spade from "../../Cards/Spade";
+import Queen from "../../Cards/Queen";
 
 export default function MonteCard(props) {
   const {
@@ -63,9 +63,9 @@ export default function MonteCard(props) {
 
   return (
     <div
-      class={`monte-flip ${flipMonte() && "flipped"} ${returnClass(i)} ${
-        restart() && "anime"
-      }`}
+      class={`monte-flip ${flipMonte() && "flipped"} flipped ${returnClass(
+        i
+      )} ${restart() && "anime"}`}
       onClick={clickHandler}
     >
       <div class={`monte ${card.color} front`}>
@@ -78,10 +78,12 @@ export default function MonteCard(props) {
           <span>{returnSymbol(card.symbol)}</span>
         </div>
         {card.value === "queen" ? (
-          <img src={queenPic} alt="" />
+          <div class="value pic">
+            <Queen />
+          </div>
         ) : (
           <div class="value">
-            {card.value === "A" ? "A" : <p>{returnSymbol(card.symbol)}</p>}
+            {card.value === "A" ? "A" : <div>{returnSymbol(card.symbol)}</div>}
           </div>
         )}
       </div>
