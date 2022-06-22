@@ -63,9 +63,9 @@ export default function MonteCard(props) {
 
   return (
     <div
-      class={`monte-flip ${flipMonte() && "flipped"} flipped ${returnClass(
-        i
-      )} ${restart() && "anime"}`}
+      class={`monte-flip ${flipMonte() && "flipped"} ${returnClass(i)} ${
+        restart() && "anime"
+      }`}
       onClick={clickHandler}
     >
       <div class={`monte ${card.color} front`}>
