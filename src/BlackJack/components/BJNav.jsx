@@ -1,13 +1,13 @@
 import { Link } from "solid-app-router";
 
-export default function BJNav({ setHome }) {
+export default function BJNav({ setHome, setBlackJackInfo }) {
   return (
     <div style={navContainer}>
       <p style={logo}>Black Jack</p>
       <div style={linkContainer}>
         <button
           class="btn d-flex justify-content-center align-items-center text-warning"
-          onClick={null}
+          onClick={() => setBlackJackInfo(true)}
         >
           <i class="fa-solid fa-circle-info"></i>
         </button>
@@ -27,7 +27,9 @@ const navContainer = {
   "align-items": "center",
   "background-color": "rgba(0, 0, 0, 0.5)",
   "margin-bottom": "10px",
-  position: "relative"
+  position: "sticky",
+  top: 0,
+  "z-index": 12
 };
 
 const linkContainer = {

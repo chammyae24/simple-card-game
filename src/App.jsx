@@ -116,7 +116,6 @@ function App() {
           element={
             <BlackJack
               setHome={setHome}
-              soundEffect={soundEffect}
               soundEffect2={soundEffect2}
               winSfx={winSfx}
               loseSfx={loseSfx}

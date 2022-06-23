@@ -1,0 +1,73 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
+
+.bjcard-container {
+  width: 100px;
+  aspect-ratio: 3/4.2;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  font-family: "Oswald", cursive;
+  font-size: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .top {
+    width: 10px;
+    margin: 0 5px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .bottom {
+    width: 10px;
+    margin: 0 5px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+  }
+
+  .bj-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+
+    svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  .bj-content.K,
+  .bj-content.J,
+  .bj-content.Q {
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+
+    &.diam,
+    &.heart {
+      border: 2px solid #cc1212;
+      padding: 10px 0;
+      border-radius: 5px;
+    }
+    &.club,
+    &.spade {
+      border: 2px solid black;
+      padding: 10px 0;
+      border-radius: 5px;
+    }
+  }
+}

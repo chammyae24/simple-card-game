@@ -1,7 +1,7 @@
 const values = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
 const types = ["diam", "club", "heart", "spade"];
 
-export const getPlayCards = () => {
+const getPlayCards = () => {
   let cardArray = [];
   for (let i = 0; i < values.length; i++) {
     for (let j = 0; j < types.length; j++) {
@@ -18,7 +18,7 @@ export const getPlayCards = () => {
 
 const getColor = type => {
   if (type === "diam" || type === "heart") {
-    return "red";
+    return "#cc1212";
   } else {
     return "black";
   }
@@ -48,13 +48,11 @@ export const shufflePlayCards = (dealerSum = 0) => {
   return [
     {
       role: "dealer",
-      cards: dealer,
-      sum: dealerSum
+      cards: dealer
     },
     {
       role: "player",
-      cards: [cards[0], cards[1]],
-      sun: getValue(cards[0]) + getValue(cards[1])
+      cards: [cards[0], cards[1]]
     },
     {
       role: "desk",
@@ -71,4 +69,22 @@ const getValue = card => {
   } else {
     return card.value;
   }
+};
+
+export const getAceCount = cards => {
+  let aceCount = 0;
+  for (let i = 0; i < cards.length; i++) {
+    if (cards[i].value === "A") {
+      aceCount++;
+    }
+  }
+  return aceCount;
+};
+
+export const getSum = cards => {
+  let sum = 0;
+  for (let i = 0; i < cards.length; i++) {
+    sum += getValue(cards[i]);
+  }
+  return sum;
 };

@@ -18,11 +18,11 @@ export default function Home({ setHome }) {
           3Card Monte
         </Link>
       </div>
-      {/* <div style={linkContainer}>
+      <div style={linkContainer}>
         <Link style={link} href="/blackjack">
           Black Jack
         </Link>
-      </div> */}
+      </div>
     </div>
   );
 }
