@@ -11,6 +11,7 @@ import winSound from "./audio/win.mp3";
 import loseSound from "./audio/lose.mp3";
 import MemoryGame from "./Memory/MemoryGame";
 import MonteGame from "./Monte/MonteGame";
+import BlackJack from "./BlackJack/BlackJack";
 
 function App() {
   const [home, setHome] = createSignal(true);
@@ -102,6 +103,18 @@ function App() {
           path="/monte"
           element={
             <MonteGame
+              setHome={setHome}
+              soundEffect={soundEffect}
+              soundEffect2={soundEffect2}
+              winSfx={winSfx}
+              loseSfx={loseSfx}
+            />
+          }
+        />
+        <Route
+          path="/blackjack"
+          element={
+            <BlackJack
               setHome={setHome}
               soundEffect={soundEffect}
               soundEffect2={soundEffect2}

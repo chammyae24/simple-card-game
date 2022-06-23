@@ -65,8 +65,10 @@ const modalHeader = {
 };
 
 const buttonContainer = {
-  width: "300px",
+  "min-width": "300px",
   display: "flex",
+  "justify-content": "center",
+  "align-items": "center",
   gap: "10px",
   color: "#5b3fd8"
 };
